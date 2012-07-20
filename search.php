@@ -21,9 +21,20 @@ include 'includes/nav.php';
 
 <div class="search">
 <form name="query" action="search.php" method="get">
-Sport: <input type="text" name="sport" placeholder="Sport" /><br/>
-From: <input type="date" name="start" /><br/>
-To: <input type="date" name="end" /><br/>
+Sport: 
+<!--<input type="text" name="sport" placeholder="Sport" /> -->
+<select name="sport">
+<option value="basketball">Basketball</option>
+<option value="soccer">Soccer</option>
+<option value="baseball">Baseball</option>
+<option value="rugby">Rugby</option>
+<option value="football">Football</option>
+<option value="golf">Golf</option>
+<option value="hockey">Hockey</option>
+</select>
+<br/>
+From: <input type="date" name="start" placeholder="Start date" /><br/>
+To: <input type="date" name="end" placeholder="End date" /><br/>
 Location: <input type="text" name="location" placeholder="Location" /><br/>
 <input type="submit" value="Search" />
 </form>

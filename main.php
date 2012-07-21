@@ -25,7 +25,7 @@
 require_once("includes/usersystem.php");
 $uf = new user_functions();
 
-if ($uf->user_authentication()) {
+if ($uf->user_authentification()) {
 
   $header = "Main Page";
   include 'includes/header.php';

@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Organise a Game</title>
+<title>Organize a Game</title>
 
 <script type="text/javascript" src="scripts/common.js"></script>
 <script type="text/javascript" src="scripts/validation.js"></script>

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-
 <?php
+session_start();
 
-setcookie("username", "", time() - (24*60*60));
-setcookie("password", "", time() - (24*60*60));
-setcookie("userid", "", time() - (24*60*60));
-
+$uf = new user_functions();
+$uf->logout();
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Logout</title>

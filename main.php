@@ -15,10 +15,15 @@
 <script type="text/javascript" src="scripts/common.js"></script>
 <link rel="stylesheet" href="stylesheets/common.css" type="text/css" />
 <link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+<script type="text/javascript">
+<!--
+function delayer(){
+    window.location = "splash.php"
+}
+//-->
+</script>
 
 </head>
-
-<body>
 
 <?php
 
@@ -27,6 +32,8 @@ $uf = new user_functions();
 
 if ($uf->user_authentification()) {
 
+  echo "<body>";
+    
   $header = "Main Page";
   include 'includes/header.php';
 
@@ -38,14 +45,11 @@ if ($uf->user_authentification()) {
   include 'includes/relevantgames.php';
 
 } else {
-
-  echo $error;
-  echo $_SESSION['view'];
-  echo "</br>";
-  header("Location: splash.php");
 }
-
 ?>
+
+<body onLoad ="setTimeout('delayer()', 5000)">
+<h2>Dude! Wrong username password combination!</h2>
 
 
 </body>

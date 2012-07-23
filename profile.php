@@ -1,11 +1,12 @@
 
 <?php
+session_start();
 
 $connstr = "host=dbsrv1 dbname=csc309g9 user=csc309g9 password=ohs7ohd4";
 $conn = pg_connect($connstr);
 
 $viewuserid = htmlspecialchars($_GET["userid"]);
-$userid = htmlspecialchars($_COOKIE["userid"]);
+$userid = $_SESSION["userid"];
 
 if (!$viewuserid) {
   $viewuserid = $userid;
@@ -74,7 +75,7 @@ SQL;
 
 <html>
 <head>
-<title>Organise a Game</title>
+<title>Profile</title>
 
 <script type="text/javascript" src="scripts/common.js"></script>
 <script type="text/javascript" src="scripts/validation.js"></script>

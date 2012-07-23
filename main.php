@@ -30,27 +30,33 @@ function delayer(){
 require_once("includes/usersystem.php");
 $uf = new user_functions();
 
-if ($uf->user_authentification()) {
-
-  echo "<body>";
+if ($uf->user_authentification() || isset($_SESSION['username'])) {
+/**************************************
+ * DO NOT:
+ * display anything before this line 
+ */    
     
-  $header = "Main Page";
-  include 'includes/header.php';
+    echo "<body>";
+    
+    $header = "Main Page";
+    include 'includes/header.php';
 
-  $addr = "main.php";
-  include 'includes/nav.php';
+    $addr = "main.php";
+    include 'includes/nav.php';
 
-  include 'includes/alerts.php';
+    include 'includes/alerts.php';
 
-  include 'includes/relevantgames.php';
+    include 'includes/relevantgames.php';
+    echo $_SESSION['username'];
+    echo $_SESSION['userid'];
 
-} else {
-}
+  
+}   else {
 ?>
 
 <body onLoad ="setTimeout('delayer()', 5000)">
 <h2>Dude! Wrong username password combination!</h2>
-
+<?php } ?>
 
 </body>
 </html>

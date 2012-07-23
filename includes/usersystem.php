@@ -20,9 +20,6 @@ class user_functions
         $passwordAlt = htmlspecialchars($_POST["password2"]);
         $email = htmlspecialchars($_POST["email"]);
 
-        if (!$username) $username = htmlspecialchars($_COOKIE["username"]);
-        if (!$password) $password = htmlspecialchars($_COOKIE["password"]);
-        $userid = htmlspecialchars($_COOKIE["userid"]);
 
         $loginSuccess = false;
 
@@ -53,6 +50,7 @@ SQL;
         If they just signed up, this will still work. */
         if (!$error) {
             $args = array($username, $password);
+            
             $sql = <<<SQL
             SELECT userID, firstname, active, admin
             FROM WebUser
@@ -81,15 +79,15 @@ SQL;
                     $error = "You're banned!";
                     $loginSuccess = false;
                 }
-
+                
+                $this->logout();
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['userid'] = $userid;
+                
             }
         }
 
-        if ($loginSuccess) {
-        /* Cheap hack for convenience */
-        setcookie("username", $username);
-        setcookie("userid", $userid);
-        }
 
         if ($loginSuccess) return TRUE;
         else return FALSE;
@@ -99,8 +97,10 @@ SQL;
     
     public function logout()
     {
-        unset($_SESSION['username']);
-        unset($_SESSION['userid']);
+        session_unset();
+        session_destroy();
+        
+        
     }
     
     public function forgot_pwd()

@@ -1,6 +1,4 @@
 <?php
-    session_start();
-    
     function get_username()
     {
         $cookie_username = '';

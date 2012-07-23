@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require_once("includes/usersystem.php");
 $uf = new user_functions();
 $uf->logout();
 ?>

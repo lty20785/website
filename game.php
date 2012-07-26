@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-
 <?php
+session_start();
 
-# Pull the game info from the database
-
-$sport = 'Hockey';
-$time = 'Friday';
-$loc = 'The rink';
-
+require_once("includes/user_interaction.php");
+$uinter = new user_interaction();
+$uinter->get_game_full_info();
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Game page</title>
@@ -34,9 +31,8 @@ include 'includes/nav.php';
 <h3>Details</h3>
 
 <?php
-echo "Sport: $sport<br/>";
-echo "Time: $time<br/>";
-echo "Location: $loc<br/>";
+
+
 ?>
 <a href="#">Interested in this game?</a>
 </div>

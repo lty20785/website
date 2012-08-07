@@ -1,8 +1,5 @@
-<?php session_start(); ?>
-
-<?php
-
-
+<?php 
+session_start(); 
 ?>
 
 
@@ -26,11 +23,11 @@ function delayer(){
 </head>
 
 <?php
-
 require_once("includes/user_system.php");
 $uf = new user_functions();
 
-if ($uf->user_authentification() || isset($_SESSION['username'])) {
+//if the user has logged in or successfully logs in
+if ($uf->user_authentification() || isset($_SESSION['userId'])) {
 /**************************************
  * DO NOT:
  * display anything before this line 
@@ -44,13 +41,9 @@ if ($uf->user_authentification() || isset($_SESSION['username'])) {
     $addr = "main.php";
     include 'includes/nav.php';
 
-    include 'includes/alerts.php';
-
     include 'includes/relevantgames.php';
-    echo $_SESSION['username'];
-    echo $_SESSION['userid'];
-
   
+    //otherwise print the error msg, and then re-direct to splash.php
 }   else {
 ?>
 

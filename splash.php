@@ -1,15 +1,3 @@
-<?php
-    function get_username()
-    {
-        $cookie_username = '';
-        if(isset($_COOKIE['username']))
-        {
-            $cookie_username = $_COOKIE['username'];
-        }
-        return $cookie_username;
-    }  
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +26,7 @@
 <div id="login">
 <h4>Log In</h4>
 <form name="login" action="main.php" method="post">
-User name: <input type="text" name="username" placeholder="User name" class="vUsername" value="<?php echo get_username(); ?>" /><br />
+User name: <input type="text" name="username" placeholder="User name" class="vUsername" /><br />
 Password: <input type="password" name="password" placeholder="Password" class="vPassword" /><br />
 <input type="hidden" name="action" value="login" />
 <input type="submit" value="Log In" />

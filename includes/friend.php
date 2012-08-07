@@ -1,3 +1,8 @@
+<?php
+
+
+
+?>
 
 <div class="friend">
 <span class="username"><a href="profile.php?userid=1">ryan2</a></span>

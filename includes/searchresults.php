@@ -14,6 +14,8 @@ search();
 <?php
 function search()
 {
+    //search for any games that matches the input by users
+    
     global $sport, $time, $loc, $gameid;
     
     $query_sport = htmlspecialchars($_GET['sport']);

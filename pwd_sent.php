@@ -5,7 +5,7 @@
         <title></title>
     </head>
     <body>
-        <h1>Your pwd has been sent!</h1>
+        <h1>Your password has been sent!</h1>
         
         <h3><a href="splash.php">click here to return to the login page</a></h3>
         

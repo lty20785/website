@@ -5,12 +5,15 @@ class user_functions
 {
     function user_functions()
     {
-        $this->sitename = "pickupgame";
+        //init 
+        $this->sitename = "pickupgame website";
         $this->randomkey = "joiaw4j90a5h";
         $this->from_addr = "admin@HighPickupGame";
     }
-    function user_authentification(){
-
+    function user_authentification()
+    {
+        //authenticate the user, if the user is signing up, automatically log in afterwards 
+        
         $connstr = "host=dbsrv1 dbname=csc309g9 user=csc309g9 password=ohs7ohd4";
         $conn = pg_connect($connstr);
 
@@ -83,7 +86,7 @@ SQL;
                 $this->logout();
                 session_start();
                 $_SESSION['username'] = $username;
-                $_SESSION['userid'] = $userid;
+                $_SESSION['userId'] = $userid;
                 
             }
         }
@@ -97,14 +100,16 @@ SQL;
     
     public function logout()
     {
+        //log out function, simply destroy the session
         session_unset();
-        session_destroy();
-        
-        
+        session_destroy();    
     }
     
     public function forgot_pwd()
     {
+        //send the password to the user's email address as long as the user 
+        //provided the correct combination of user name and email address
+        
         $connstr = "host=dbsrv1 dbname=csc309g9 user=csc309g9 password=ohs7ohd4";
         $conn = pg_connect($connstr);
         $username = htmlspecialchars($_POST["username"]);
@@ -131,8 +136,18 @@ SQL;
         
     }
     
+    function change_pwd()
+    {
+        //change the password, need OldPwd to match with the original password
+        
+        $OldPwd = htmlspecialchars($_POST['OldPwd']);
+        $NewPwd1 = htmlspecialchars($_POST['NewPwd1']);
+        $NewPwd2 = htmlspecialchars($_POST['NewPwd2']);
+    }
+    
     private function send_welcome_email($username, $user_email)
     {
+        
         $mailer = new PHPMailer();
         
         $mailer->CharSet = 'utf-8';
@@ -158,6 +173,7 @@ SQL;
 
     private function send_forgotten_pwd($username, $pwd, $email) 
     {
+        
         $mailer = new PHPMailer();
         
         $mailer->CharSet = 'utf-8';

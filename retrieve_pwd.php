@@ -1,7 +1,8 @@
 <?php
+//if the form has been submitted, then try to send the password to the user
        if(isset($_POST['submit']))
        {
-           require_once("includes/usersystem.php");
+           require_once("includes/user_system.php");
            $uf = new user_functions();
            if($uf->forgot_pwd())
            {
@@ -20,7 +21,7 @@
     </head>
     <body>
         
-        <div id="retrieve pwd">
+        <div id="retrieve_pwd">
         <h4>Retrieve Your Password</h4>
         <form name="retrieve_pwd" action="retrieve_pwd.php" method="post">
         User name: <input type="text" name="username" placeholder="User name" class="vUsername"/><br />

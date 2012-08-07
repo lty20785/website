@@ -1,12 +1,13 @@
 
 <?php
 session_start();
+include_once 'includes/check_login.php';
 
 $connstr = "host=dbsrv1 dbname=csc309g9 user=csc309g9 password=ohs7ohd4";
 $conn = pg_connect($connstr);
 
 $viewuserid = htmlspecialchars($_GET["userid"]);
-$userid = $_SESSION["userid"];
+$userid = $_SESSION["userId"];
 
 if (!$viewuserid) {
   $viewuserid = $userid;

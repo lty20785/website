@@ -20,7 +20,7 @@ $uf->logout();
 <body>
 <h2>Goodbye!</h2>
 
-<p>You are now successfully logged out.  Congratulations!</p>
+<p>You are now successfully logged out.</p>
 <p>Click <a href="splash.php">here</a> to log back in.</p>
 
 </body>

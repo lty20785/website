@@ -1,14 +1,14 @@
 <nav>
 <ul>
 <li><a href="main.php">Main</a></li>
-<li><a href="organise.php">Organise a Game</a></li>
+<li><a href="organise.php">Organize a Game</a></li>
 <li><a href="search.php">Search</a></li>
 
 <?php
 
 echo <<<HTML1
-<li><a href="friends.php?userid={$userid}">Friends</a></li>
-<li><a href="profile.php?userid={$userid}">Profile</a></li>
+<li><a href="friends.php?userid={$_SESSION['userId']}">Friends</a></li>
+<li><a href="profile.php?userid={$_SESSION['userId']}">Profile</a></li>
 HTML1;
 
 if ($admin == "t") {

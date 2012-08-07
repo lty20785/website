@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include_once 'includes/check_login.php';
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -33,8 +38,8 @@ Sport:
 <option value="hockey">Hockey</option>
 </select>
 <br/>
-From: <input type="date" name="start" placeholder="Start date" /><br/>
-To: <input type="date" name="end" placeholder="End date" /><br/>
+From: <input type="date" name="start" /><br/>
+To: <input type="date" name="end" /><br/>
 Location: <input type="text" name="location" placeholder="Location" /><br/>
 <input type="submit" value="Search" />
 </form>

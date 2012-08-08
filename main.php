@@ -2,7 +2,6 @@
 session_start(); 
 ?>
 
-
 <!DOCTYPE html>
 
 <html>
@@ -27,7 +26,9 @@ require_once("includes/user_system.php");
 $uf = new user_functions();
 
 //if the user has logged in or successfully logs in
-if ($uf->user_authentification() || isset($_SESSION['userId'])) {
+$main_userId = -1;
+$main_userId = $uf->user_authentification();
+if ( $main_userId>0 || isset($_SESSION['userId'])) {
 /**************************************
  * DO NOT:
  * display anything before this line 

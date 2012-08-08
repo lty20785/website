@@ -5,6 +5,8 @@
  * @author lty
  */
 
+require_once 'database/game.php';
+
 class user_interaction {
     
     function user_interaction()
@@ -22,6 +24,7 @@ class user_interaction {
         $this->gameid = trim(htmlspecialchars($_GET['gameid']));
          
          */
+
     }
     
     
@@ -65,8 +68,25 @@ class user_interaction {
         /* create a game, if succesed, return the game id of the newly created.
          * otherwise, return FALSE
          */
+        echo "Hi!\n\n";
         
+        $sportId = htmlspecialchars($_POST['sport']);
+        $location = htmlspecialchars($_POST['location']);
+        $date = new DateTime(htmlspecialchars($_POST['date']));
+        $time = htmlspecialchars($_POST['time']);
+        $privacy = 'public';  # Disabled for now;
+        $description = htmlspecialchars($_POST['description']);
         
+        $gameInfo = array(
+          "sportId" => $sportId,
+          "location" => $location,
+          "date" => $date->format("Y-m-d"),
+          "time" => $time,
+          "privacy" => $privacy,
+          "description" => $description,
+        );
+
+        return createGame($gameInfo);
     }
     
     function change_description()

@@ -13,7 +13,7 @@ CREATE TABLE WebUser (
 
 CREATE TABLE Sport (
   sportID SERIAL PRIMARY KEY,
-  sportName text
+  sportName text UNIQUE
 );
 
 CREATE TABLE Position (
@@ -51,13 +51,15 @@ CREATE TABLE Game (
   date date,
   time time,
   privacy text CHECK (privacy IN ('private', 'invite', 'public')),
-  description text
+  description text,
+  tookPlace boolean
 );
 
 CREATE TABLE Joined (
   userID int REFERENCES WebUser (userID) ON DELETE CASCADE,
   gameID int REFERENCES Game (gameID) ON DELETE CASCADE,
-  confirmed boolean NOT NULL DEFAULT false
+  confirmed boolean NOT NULL DEFAULT false,
+  doneRating boolean
 );
 
 CREATE TABLE Comment (

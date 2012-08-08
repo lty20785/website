@@ -1,0 +1,8 @@
+
+select[name="sport"] {
+  width: 149px;
+}
+
+div.ui-datepicker {
+  font-size: 0.75em;
+}

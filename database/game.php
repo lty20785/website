@@ -3,7 +3,7 @@
 require_once 'dbinterface.php';
 
 
-function createGame($sportId, $date, $time, $location, $privacy) {
+function createGame($gameInfo) {
 try {
 
   if (!$conn = connectDB()) {
@@ -12,10 +12,19 @@ try {
 
   /* Insert the row into the game tbale */
   $userId = $_SESSION['userId'];
-  $args = array($userId, $sportId, $location, $date, $time, $privacy);
+  $args = array(
+    $userId,
+    $gameInfo["sportId"],
+    $gameInfo["location"],
+    $gameInfo["date"],
+    $gameInfo["time"],
+    $gameInfo["privacy"],
+    $gameInfo["description"],
+  );
+  
   $sql = <<<SQL
-INSERT INTO Game (organiserID, sportID, location, date, time, privacy)
-VALUES ($1, $2, $3, $4, $5, $6)
+INSERT INTO Game (organiserID, sportID, location, date, time, privacy, description)
+VALUES ($1, $2, $3, $4, $5, $6, $7)
 RETURNING gameID;
 SQL;
 
@@ -145,6 +154,20 @@ SQL;
   closeDB($conn);
   return false;
 }
+}
+
+
+/* Check if a game was set to take place in the past */
+function isGamePast($gameId) {
+  $info = getGameInfo($gameId);
+  if (!$info) {
+    return null;
+  }
+
+  $timestamp = $info['date'] . " " . $info['time'];
+  $gameTime = new DateTime($timestamp);
+
+  return $gameTime < new DateTime;
 }
 
 

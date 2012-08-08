@@ -26,9 +26,9 @@ require_once("includes/user_system.php");
 $uf = new user_functions();
 
 //if the user has logged in or successfully logs in
-$main_userId = -1;
+$main_userId = false;
 $main_userId = $uf->user_authentification();
-if ( $main_userId>0 || isset($_SESSION['userId'])) {
+if ( /*$main_userId != false || */isset($_SESSION['userId'])) {
 /**************************************
  * DO NOT:
  * display anything before this line 
@@ -41,6 +41,8 @@ if ( $main_userId>0 || isset($_SESSION['userId'])) {
 
     $addr = "main.php";
     include 'includes/nav.php';
+    
+    echo '<a href= change_pwd.php>change pwd</a><br/>';
 
     include 'includes/relevantgames.php';
   
@@ -48,8 +50,13 @@ if ( $main_userId>0 || isset($_SESSION['userId'])) {
 }   else {
 ?>
 
-<body onLoad ="setTimeout('delayer()', 5000)">
-<h2>Dude! Wrong username password combination!</h2>
+<body onLoad ="setTimeout('delayer()', 3000)">
+<h2>If you were trying to log in, Wrong username password combination!<br/><br/>
+    If you were signing up, The username you entered might have been taken already<br/><br/>
+    You will be re-directed to the splash page in a moment!
+
+
+</h2>
 <?php } ?>
 
 </body>

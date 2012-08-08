@@ -20,5 +20,8 @@ include_once 'includes/check_login.php';
         $addr="organise.php";
         include 'includes/nav.php';
         ?>
+        
+        <h3>Now you can perform other actions.</h3>
     </body>
+    
 </html>

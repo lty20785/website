@@ -60,7 +60,7 @@ SQL;
   if (getUpdateCount($result) != 1) {
     /* User creation failed, username already exists */
     closeDB($conn);
-    return -1;
+    return false;
   }
 
   /* User creation successful, now log the user in */
@@ -70,7 +70,7 @@ SQL;
 } catch (Exception $e) {
   error("signup {$e}");
   closeDB($conn);
-  return -2;
+  return false;
 }
 }
 

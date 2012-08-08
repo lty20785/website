@@ -19,6 +19,9 @@ if (isset($_POST['submit']))
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="stylesheets/common.css" type="text/css" />
+        <link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+        
         <title>Change your password</title>
     </head>
     <body>
@@ -26,7 +29,7 @@ if (isset($_POST['submit']))
         <h1>Change Password</h1><br/>
         
         <form name="changePwd" action="change_pwd.php" method="post">
-        Old Password: <input type="password" name="oldPwd" placeholder="Old Password" class="vPassword1" /><br />
+        Old Password: <input type="password" name="OldPwd" placeholder="Old Password" class="vPassword1" /><br />
         New Password: <input type="password" name="NewPwd1" placeholder="New Password" class="vPassword1" /><br />
         Repeat new password: <input type="password" name="NewPwd2" placeholder="repear new password" class = "vPassword2" /><br />
         

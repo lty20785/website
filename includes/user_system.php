@@ -15,7 +15,7 @@ class user_functions
         //authenticate the user, if the user is signing up, automatically log in afterwards 
         include 'database/session.php';
         
-        $userId=-1;
+        $userId=false;
         $action = htmlspecialchars($_POST["action"]);
         $username = htmlspecialchars($_POST["username"]);
         $password = htmlspecialchars($_POST["password"]);
@@ -23,18 +23,23 @@ class user_functions
         $email = htmlspecialchars($_POST["email"]);
 
 
-        $loginSuccess = false;
-
         if ($action == "signup") {
             /* check that passwords match */
             if ($password != $passwordAlt) {
-                return -1;
+                return false;
             } else {
 
-                /* Attempt to create new username and password in database */
+                /* Attempt to create new username and password in database, 
+                 * then automatically log in */
                 $userId = signup($username, $password, $email);
-                if ($userId>0)
+                
+                if ($userId == false || $userId<0) return false;
+                
                 $this->send_welcome_email($username, $email);
+                $this->logout();
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['userId'] = $userId;
                 
                 return $userId;
             }
@@ -44,7 +49,7 @@ class user_functions
         If they just signed up, this will still work. */
 
         $userId = login($username, $password);
-        if ($userId < 0) return $userId;
+        if ($userId == false || $userId<0) return false;
         
         $this->logout();
         session_start();
@@ -95,10 +100,14 @@ class user_functions
     function change_pwd()
     {
         //change the password, need OldPwd to match with the original password
-        
+        include 'database/session.php';
         $OldPwd = htmlspecialchars($_POST['OldPwd']);
         $NewPwd1 = htmlspecialchars($_POST['NewPwd1']);
         $NewPwd2 = htmlspecialchars($_POST['NewPwd2']);
+        
+        if ($NewPwd1!=$NewPwd2) return false;
+           
+        return(changePassword($OldPwd, $NewPwd1));
     }
     
     private function send_welcome_email($username, $user_email)

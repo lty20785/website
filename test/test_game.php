@@ -5,12 +5,25 @@ include '../database/game.php';
 /* Test game creation */
 function testCreate() {
 
-  $gameId = createGame(1, '2012-12-25', '9:00', 'Downtown', 'invite');
+  $gameInfo = array(
+    "sportId" => 1,
+    "date" => '25/12/2012',
+    "time" => '9:00',
+    "location" => 'Downtown',
+    "privacy" => "public",
+    "description" => "Good game!",
+  );
+
+  $gameId = createGame($gameInfo);
   if (!$gameId) {
     echo "testCreate--Failed to create game.\n";
     return false;
   }
 
+  if (isGamePast($gameId) === null) {
+    echo "testCreate--Testing whether game was in the past failed.\n";
+    return false;
+  }
   return $gameId;
 }
 

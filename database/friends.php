@@ -125,7 +125,7 @@ SQL;
 }
 
 
-/* Check if two players ar efriends */
+/* Check if two players are friends */
 function areFriends($userId1, $userId2) {
   $friends = getFriends($userId1);
   if (!$friends) {

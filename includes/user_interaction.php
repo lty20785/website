@@ -88,6 +88,20 @@ class user_interaction {
         
     }
     
+    function invite_players()
+    {
+        //for any game, send invitations to the players listed in $_POST
+        //the invitations will be sent via email
+        
+    }
+    
+    function suggest_games()
+    {
+        //for any user, send suggestion of games to the user
+        //the invitation will be sent via email
+        
+    }
+    
 }
 
 ?>

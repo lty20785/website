@@ -12,7 +12,7 @@ if (!$game_uinter->userid) {
 
 
 // Updated the game
-if ($game_uinter->gameid and isset($_POST)) {
+if ($game_uinter->gameid and isset($_POST['save'])) {
 
 if (!$game_uinter->ispast) {
 

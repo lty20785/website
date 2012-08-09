@@ -1,0 +1,19 @@
+
+select[name="sport"] {
+  width: 149px;
+}
+
+div.ui-datepicker {
+  font-size: 0.8em;
+}
+
+div#searchResults ul {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+div.gamebox {
+  margin-top: 1em;
+}
+

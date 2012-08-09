@@ -14,7 +14,7 @@ if (!$viewuserid) {
 }
 
 /* Update the user's profile  if they edited it */
-if (isset($_POST)) {
+if (isset($_POST["Save"])) {
   $profile = array(
     "firstname" => htmlspecialchars($_POST["firstname"]),
     "lastname" => htmlspecialchars($_POST["lastname"]),

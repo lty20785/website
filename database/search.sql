@@ -29,8 +29,8 @@ AS $body$
               )
           )
       )
-      AND coalesce($1.startDate, date)<=date
-      AND date<=coalesce($1.startDate, date)
+      AND coalesce($1.startDate, current_timestamp)<=date
+      AND date<=coalesce($1.endDate, date)
       AND location ILIKE '%' || coalesce($1.location, '') || '%'
   GROUP BY g.gameID, date
   ),

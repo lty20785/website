@@ -18,7 +18,7 @@ try {
 
   /* Run the search stored proc */
   $args = array(
-    $criteria["sportID"], $criteria["startDate"],
+    $criteria["sportId"], $criteria["startDate"],
     $criteria["endDate"], $criteria["location"],
     $userId, $numResults, $offset,
   );
@@ -27,6 +27,7 @@ SELECT gameID, resultRank, totalResults
 FROM search(($1, $2, $3, $4), $5, $6, $7)
 ORDER by resultRank;
 SQL;
+
 
   $result = executeSQL($conn, $sql, $args);
   
@@ -54,7 +55,7 @@ SQL;
 /* Get a list of relevant games */
 function suggestGames($numGames) {
   $criteria = array(
-    "sportID" => null,
+    "sportId" => null,
     "startDate" => null,
     "endDate" => null,
     "location" => null,

@@ -15,6 +15,10 @@ Validator.prototype.validateForm = function(e) {
   for (var i = 0; i < this.form.length && !this.failed; i++) {
     el = this.form[i];
 
+    if (el.className.match(/\bvBlank\b/) && el.value == "") {
+      continue;
+    }
+    
     // Validate input formats
     if (el.className.match(/\bvPassword(1|2)?\b/)
           && !this.validatePassword(el)) {

@@ -98,5 +98,46 @@ function getUserName($userId) {
   return $profile["username"];
 }
 
+/* Return true if $userId is the admin.  Default's for current user. */
+function isAdmin($userId = null) {
+try {
+
+  if (!$conn = connectDB()) {
+    return false;
+  }
+
+  // Default to current user
+  if (!isset($userId)) {
+    $userId = $_SESSION['userId'];
+  }
+
+  // Still not set?  Error
+  if (!isset($userId)) {
+    return false;
+  }
+
+  $args = array($userId);
+  $sql = <<<SQL
+SELECT *
+FROM WebUser
+WHERE userID=$1
+    AND admin=true;
+SQL;
+
+  $result = executeSQL($ocnn, $sql, $args);
+  if (getResultCount($result) == 1) {
+    closeDB($conn);
+    return true;
+  }
+
+  closeDB($conn);
+  return false;
+
+} catch (Exception $e) {
+  error("isAdmin: {$e}");
+  closeDB($conn);
+  return false;
+}
+}
 
 ?>

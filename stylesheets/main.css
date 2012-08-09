@@ -11,7 +11,17 @@ div#alerts ul {
   margin-left: 0px;
 }
 
-/* Relevant games */
+div#listcontainer {
+  display: inline-block;
+  width: 650px;
+  max-width: 650px;
+  text-align: center;
+}
+
+div#gamelist, div#mygamelist {
+  float: left;
+  width: 50%;
+}
 
 div#gamelist ul {
   list-style-type: none;
@@ -19,7 +29,16 @@ div#gamelist ul {
   margin-left: 0px;
 }
 
-div.gamebox {
-
+div#mygamelist ul {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
 }
 
+div.gamebox {
+  margin-top: 1em;
+}
+
+img#rightArrow {
+  height: 1em;
+}

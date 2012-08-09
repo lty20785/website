@@ -179,7 +179,7 @@ try {
   if (!$conn = connectDB()) {
     return false;
   }
-
+  
   /* Find info about the game */
   $args = array($gameId);
   $sql = <<<SQL

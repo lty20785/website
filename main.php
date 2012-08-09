@@ -42,9 +42,12 @@ if ( /*$main_userId != false || */isset($_SESSION['userId'])) {
     $addr = "main.php";
     include 'includes/nav.php';
     
-    echo '<a href= change_pwd.php>change pwd</a><br/>';
+    echo '<a href="change_pwd.php">Change password</a><br/>';
 
+    echo '<div id="listcontainer">';
+    include 'includes/mygames.php';
     include 'includes/relevantgames.php';
+    echo '</div>';
   
     //otherwise print the error msg, and then re-direct to splash.php
 }   else {

@@ -110,4 +110,42 @@ SQL;
 }
 }
 
+
+/* Careful now... */
+function getPassword($userId) {
+try {
+
+  if (!$conn = connectDB()) {
+    return false;
+  }
+
+  $args = array($userId);
+  $sql = <<<SQL
+SELECT password
+FROM WebUser
+WHERE userID=$1;
+SQL;
+
+  $result = executeSQL($conn, $sql, $args);
+
+  if (getResultCount($result) != 1) {
+    closeDB($conn);
+    return false;
+  }
+
+  $row = nextRow($result);
+  $password = $row[0];
+  
+  closeDB($conn);
+  return $password;
+
+} catch (Exception $e) {
+  error("getPassword: {$e}");
+  closeDB($conn);
+  return false;
+}
+}
+
+
+
 ?>

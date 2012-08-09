@@ -98,6 +98,41 @@ function getUserName($userId) {
   return $profile["username"];
 }
 
+
+function getUserId($username) {
+try {
+
+  if (!$conn = connectDB()) {
+    return false;
+  }
+
+  $args = array($username);
+  $sql = <<<SQL
+SELECT userID
+FROM WebUser
+WHERE username=$1;
+SQL;
+
+  $result = executeSQL($conn, $sql, $args);
+  if (getResultCount($result) != 1) {
+    closeDB($conn);
+    return false;
+  }
+
+  $row = nextRow($result);
+  $userId = $row[0];
+
+  closeDB($conn);
+  return $userId;
+
+} catch (Exception $e) {
+  error("getUserId: $e");
+  closeDB($conn);
+  return false;
+}
+}
+
+
 /* Return true if $userId is the admin.  Default's for current user. */
 function isAdmin($userId = null) {
 try {

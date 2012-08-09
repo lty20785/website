@@ -3,12 +3,12 @@
        if(isset($_POST['submit']))
        {
            require_once("includes/user_system.php");
+
            $uf = new user_functions();
-           if($uf->forgot_pwd())
+           $error = $uf->forgot_pwd();
+           if(!$error)
            {
                header("Location: pwd_sent.php");
-           }else{
-               echo "Incorrect username or email! Please try again. ";
            }
        }
 ?>
@@ -23,10 +23,15 @@
         
         <div id="retrieve_pwd">
         <h4>Retrieve Your Password</h4>
+<?php
+if ($error) {
+  echo "<p class='errmsg'>{$error}</p>";
+}
+?>
         <form name="retrieve_pwd" action="retrieve_pwd.php" method="post">
         User name: <input type="text" name="username" placeholder="User name" class="vUsername"/><br />
         Email: <input type="email" name="email" placeholder="Email" class="vEmail" /><br />
-        <input type="submit" name ="submit" value="retrieve password" />
+        <input type="submit" name ="submit" value="Retrieve password" />
         </form>
         </div>
         

@@ -13,7 +13,7 @@ class user_functions
     function user_authentification()
     {
         //authenticate the user, if the user is signing up, automatically log in afterwards 
-        include 'database/session.php';
+        include_once 'database/session.php';
         
         $userId=false;
         $action = htmlspecialchars($_POST["action"]);
@@ -23,40 +23,49 @@ class user_functions
         $email = htmlspecialchars($_POST["email"]);
 
 
-        if ($action == "signup") {
-            /* check that passwords match */
-            if ($password != $passwordAlt) {
-                return false;
-            } else {
+        if ($action == "login") {
+          $userId = login($username, $password);
 
-                /* Attempt to create new username and password in database, 
-                 * then automatically log in */
-                $userId = signup($username, $password, $email);
-                
-                if ($userId == false || $userId<0) return false;
-                
-                $this->send_welcome_email($username, $email);
-                $this->logout();
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['userId'] = $userId;
-                
-                return $userId;
-            }
+          if ($userId) {
+            $_SESSION['userId'] = $userId;
+            $_SESSION['username'] = $username;
+            return array();
+          }
+
+          // Failed to login
+          return array(
+            "where" => "login",
+            "msg" => "Incorrect username or password.",
+          );
+
+        } elseif ($action == "signup") {
+            /* check that passwords match */
+          if ($password != $passwordAlt) {
+            return array(
+              "where" => "signup",
+              "msg" => "Password do not match.",
+            );
+          }
+
+          /* Attempt to create new username and password in database, 
+           * then automatically log in */
+          $userId = signup($username, $password, $email);
+          
+          if (!$userId) {
+            return array(
+              "where" => "signup",
+              "msg" => "Username is already in use.",
+            );
+          }
+            
+          $_SESSION['username'] = $username;
+          $_SESSION['userId'] = $userId;
+          $this->send_welcome_email($username, $email);
+          $this->logout();
+
+          return array();
         }
 
-        /* Now we retrieve the user's information.
-        If they just signed up, this will still work. */
-
-        $userId = login($username, $password);
-        if ($userId == false || $userId<0) return false;
-        
-        $this->logout();
-        session_start();
-        $_SESSION['username'] = $username;
-        $_SESSION['userId'] = $userId;
-                
-        return $userId;
     }
     
     public function logout()
@@ -70,31 +79,26 @@ class user_functions
     {
         //send the password to the user's email address as long as the user 
         //provided the correct combination of user name and email address
-        
-        $connstr = "host=dbsrv1 dbname=csc309g9 user=csc309g9 password=ohs7ohd4";
-        $conn = pg_connect($connstr);
-        $username = htmlspecialchars($_POST["username"]);
-        $email = htmlspecialchars($_POST["email"]);
-        
-        $query = "select password from webuser where username='$username' and 
-        emailaddress='$email';";
-        echo $query;
-        
-        $result = pg_query($query);
-        
-        if(pg_num_rows($result)!=1)
-        {
-            echo "Wrong username and email combination!";
-            return FALSE;
+
+        $username = htmlspecialchars($_POST['username']);
+        $email = htmlspecialchars($_POST['email']);
+
+        require_once 'database/profile.php';
+        require_once 'database/session.php';
+
+        $usernameId = getUserId($username);
+        if (!$usernameId) {
+          return "Username does not exist.";
         }
-        
-        $entry = pg_fetch_assoc($result);
-        $pwd = $entry['password'];
-        echo $pwd;
-        
-        return $this->send_forgotten_pwd($username, $pwd, $email);
-        
-        
+
+        $userInfo = getProfile($usernameId);
+        if ($userInfo["email"] != $email) {
+          return "Email doesn't match the one we have on file.";
+        }
+
+        $password = getPassword($userId);
+        return $this->send_forgotten_pwd($username, $password, $email);
+       
     }
     
     function change_pwd()
@@ -162,7 +166,7 @@ class user_functions
             return FALSE;
         }
         
-        return TRUE;
+        return false;
     }
     
     

@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+require_once "includes/user_system.php";
+
+$uf = new user_functions();
+$error = $uf->user_authentification();
+
+if (isset($_SESSION['userId'])) {
+  // Logged in or signed up succesfully, or already logged int
+  // So redirect
+  header("Location: main.php");
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +42,12 @@
 
 <div id="login">
 <h4>Log In</h4>
-<form name="login" action="main.php" method="post">
+<?php
+if ($error and $error["where"] == "login") {
+  echo "<p class='errmsg'>{$error['msg']}</p>";
+}
+?>
+<form name="login" action="splash.php" method="post">
 User name: <input type="text" name="username" placeholder="User name" class="vUsername" /><br />
 Password: <input type="password" name="password" placeholder="Password" class="vPassword" /><br />
 <input type="hidden" name="action" value="login" />
@@ -36,6 +58,11 @@ Password: <input type="password" name="password" placeholder="Password" class="v
 
 <div id="signup">
 <h4>New User?</h4>
+<?php
+if ($error and $error["where"] == "signup") {
+  echo "<p class='errmsg'>{$error['msg']}</p>";
+}
+?>
 <form name="signup" action="main.php" method="post" >
 User name: <input type="text" name="username" placeholder="User name" class="vUsername" /><br />
 Email: <input type="email" name="email" placeholder="Email" class="vEmail" /><br />

@@ -61,11 +61,15 @@ if ($error) {
   $addr="profile.php";
   include 'includes/nav.php';
 
-echo <<<HTML1
+  if ($viewuserid == $userid) {
+    echo <<<PWDHTML
 <p>
 <a href="change_pwd.php">Change password</a><br/>
 </p>
+PWDHTML;
+  }
 
+echo <<<HTML1
 <form name="profile" action="profile.php" method="post" id="editableForm" class="uneditable">
 Username: {$profile['username']}<br/>
 First Name: <span class="editfield" name="firstname">{$profile['firstName']}</span>

@@ -3,8 +3,8 @@
 <ul>
 
 <?php
-include 'database/friends.php';
-include 'database/profile.php';
+include_once 'database/friends.php';
+include_once 'database/profile.php';
 
 $frd_list= getFriends();
 $frdId=-1;

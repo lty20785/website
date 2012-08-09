@@ -74,7 +74,12 @@ if (!$game_uinter->ispast) {
 <head>
 <title>Game page</title>
 
+<link rel="stylesheet" href="stylesheets/jquery/jquery-ui-1.8.22.custom.css" type="text/css" />
+<script type="text/javascript" src="scripts/jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery-ui-1.8.22.custom.min.js"></script>
+
 <script type="text/javascript" src="scripts/common.js"></script>
+<script type="text/javascript" src="scripts/validation.js"></script>
 <script type="text/javascript" src="scripts/game.js"></script>
 <link rel="stylesheet" href="stylesheets/common.css" type="text/css" />
 <link rel="stylesheet" href="stylesheets/game.css" type="text/css" />
@@ -120,17 +125,15 @@ Location:
 
 Date:
 <span class="editfield" name="date">{$gameInfo['date']}</span>
-<input type="text" id="datepicker" name="date" value="{$gameInfo['date']}" /><br/>
+<input type="text" id="datepicker" name="date" value="{$gameInfo['date']}" class="vDate" /><br/>
 
 Time:
 <span class="editfield" name="time">{$gameInfo['time']}</span>
-<input type="text" name="time" value="{$gameInfo['time']}" /><br/>
+<input type="text" name="time" value="{$gameInfo['time']}" class="vTime" /><br/>
 
-Description:
+<span class="unhidden">Description: </span>
 <span class="editfield" name="description">{$gameInfo['description']}</span>
-<input type="text" name="description" value="{$gameInfo['description']}" /><br/>
-
-
+<textarea name="description" cols="30" rows="6">{$gameInfo['description']}</textarea><br/>
 HTML1;
 
 // Edit details, cancel the agme */

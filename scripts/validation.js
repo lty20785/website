@@ -96,7 +96,7 @@ Validator.prototype.validateDate = function(el) {
 
 Validator.prototype.validateTime = function(el) {
   var result;
-  result = el.value.match(/^(\d{1,2})(?::(\d\d))? ?(?:(a|p)\.?m?\.?)?$/i);
+  result = el.value.match(/^(\d{1,2})(?::(\d\d))?(?::(?:\d\d))? ?(?:(a|p)\.?m?\.?)?$/i);
 
   if (!result) {
     return false;
@@ -105,7 +105,7 @@ Validator.prototype.validateTime = function(el) {
   var h = parseInt(result[1]);
   var m = parseInt(result[2]);
   var ampm = Boolean(result[3]);
-  
+
   if(h > 24
         || (h == 24 && m > 0)
         || m > 59
@@ -113,6 +113,14 @@ Validator.prototype.validateTime = function(el) {
     return false;
   }
 
+  if (result[3] == "p") {h = h + 12;}
+  if (!m) {m = 0;}
+
+  reformatted =
+      ("0" + h).slice(-2) + ":"
+      + ("00" + m).slice(-2) + ":" + "00";
+  
+  el.value = reformatted;
   return true;
 }
 

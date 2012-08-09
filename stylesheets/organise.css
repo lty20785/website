@@ -4,7 +4,10 @@ select[name="sport"] {
 }
 
 div.ui-datepicker {
-  font-size: 0.75em;
+  font-size: 0.8em;
 }
 
+textarea {
+  vertical-align: middle;
+}
 

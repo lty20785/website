@@ -29,6 +29,7 @@ if (isset($_POST['submit']))
 <link rel="stylesheet" href="stylesheets/jquery/jquery-ui-1.8.22.custom.css" type="text/css" />
 <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="scripts/jquery/jquery-ui-1.8.22.custom.min.js"></script>
+
 <script type="text/javascript" src="scripts/common.js"></script>
 <script type="text/javascript" src="scripts/validation.js"></script>
 <script type="text/javascript" src="scripts/organise.js"></script>
@@ -61,8 +62,8 @@ foreach ($sports as $sport) {
 Date: <input type="text" id="datepicker" name="date" class="vDate" ><br/>
 Time: <input type="time" name="time" class="vTime" /><br/>
 Location: <input type="text" name="location" /><br/>
-Description:
-<br/><textarea name="description" cols="30" rows="6" placeholder=
+<span class="unhidden">Description: </span>
+<textarea name="description" cols="30" rows="6" placeholder=
                "Enter a description of your game, or anything other players should know"></textarea><br/>
 
 <input type="submit" name="submit" value="Create" />

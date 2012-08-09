@@ -1,10 +1,20 @@
 
-form#editableForm.uneditable > input:not([class="unhidden"]) {
+div.ui-datepicker {
+  font-size: 0.8em;
+}
+
+form#editableForm.uneditable > input:not([class="unhidden"]),
+form#editableForm.uneditable > textarea:not([class="unhidden"]) {
   display: none;
 }
 
-form#editableForm.editable > span, form#editableForm.editable > button {
+form#editableForm.editable > span:not([class="unhidden"]),
+form#editableForm.editable > button:not([class="unhidden"]) {
   display: none;
+}
+
+textarea {
+  vertical-align: middle;
 }
 
 ul#participants {

@@ -62,6 +62,10 @@ if ($error) {
   include 'includes/nav.php';
 
 echo <<<HTML1
+<p>
+<a href="change_pwd.php">Change password</a><br/>
+</p>
+
 <form name="profile" action="profile.php" method="post" id="editableForm" class="uneditable">
 Username: {$profile['username']}<br/>
 First Name: <span class="editfield" name="firstname">{$profile['firstName']}</span>

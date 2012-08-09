@@ -1,17 +1,20 @@
-<?php
-
-
-
-?>
 
 <div class="friend">
-<span class="username"><a href="profile.php?userid=1">ryan2</a></span>
+<span class="username">
+    <?php
+    include '../database/profile.php';
+    $frd_detail=getProfile($frdId);
+    
+    echo "Friend's name: ".$frd_detail['firstName']." ".$frd_detail['lastName']."<br/>";
+    echo "Location: ". $frd_detail['location']."<br/>";
+    echo $frd_detail['firstName']."'s profile is ";
+    echo "<a href='../profile.php?userid=$frdId' >here</a><br/><br/>";
+
+
+    ?>
+</span>
 <div class="frienddetails">
-<ul>
-<li>Sports: Hockey, volleyball</li>
-<li>Gender: Male</li>
-<li>Your Ratings: +5</li>
-</ul>
+
 </div>
 
 </div>

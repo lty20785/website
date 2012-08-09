@@ -74,7 +74,6 @@ SQL;
   $result = executeSQL($conn, $sql, $args);
   if (getUpdateCount($result) != 1) {
     /* They're already friends */
-    echo "|" . $lower . "<" . $higher . "|";
     closeDB($conn);
     return false;
   }
@@ -201,7 +200,6 @@ try {
   if (!areFriends($activeUser, $userId)) {
     /* They're not friends yet, so make them friends */
     if (!makeFriends($activeUser, $userId)) {
-      echo "aaaa";
       return false;
     }
   }

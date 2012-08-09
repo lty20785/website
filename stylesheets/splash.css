@@ -7,6 +7,46 @@ div {
 }
 */
 
+/* Username availability stuff */
+div#usernameAvailability {
+  display: inline-block;
+  margin-left: -15px;
+  width: 6em;
+  margin-top: 20px;
+  vertical-align: top;
+}
+
+h4#spacer {
+  visibility: hidden;
+}
+
+div#usernameAvailability > div {
+  display: none;
+  width: 6em;
+  height: 1.5em;
+  background-color: #eeeeee;
+  border: 1px solid gray;
+  border-radius: 3px;
+  text-align: center;
+}
+
+div#usernameAvailability img {
+  vertical-align: middle;
+  height: 1em;
+  margin-left: 0.5em;
+}
+
+
+div#usernameAvailability.available > div#usernameAvailable {
+  display: block;
+}
+
+div#usernameAvailability.unavailable > div#usernameUnavailable {
+  display: block;
+}
+
+
+
 div#about {
   display: block;
   max-width: 800px;

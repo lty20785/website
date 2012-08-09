@@ -1,10 +1,19 @@
 
+.errmsg {
+  color: red;
+}
+
 body {
   text-align: center;
 }
 
 h2, h3, h4 {
   color: dimgray;
+}
+
+
+a:visited {
+  color: blue;
 }
 
 /* Navigation */

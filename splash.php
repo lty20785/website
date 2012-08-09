@@ -63,7 +63,7 @@ if ($error and $error["where"] == "signup") {
   echo "<p class='errmsg'>{$error['msg']}</p>";
 }
 ?>
-<form name="signup" action="main.php" method="post" >
+<form name="signup" action="splash.php" method="post" >
 User name: <input type="text" name="username" placeholder="User name" class="vUsername" /><br />
 Email: <input type="email" name="email" placeholder="Email" class="vEmail" /><br />
 Password: <input type="password" name="password" placeholder="Password" class="vPassword1" /><br />
@@ -71,6 +71,12 @@ Repeat password: <input type="password" name="password2" placeholder="Password" 
 <input type="hidden" name="action" value="signup" />
 <input type="submit" value="Sign Up" />
 </form>
+</div>
+
+<div id="usernameAvailability" class="unsure">
+<h4 id="spacer">Spacer</h4>
+<div id="usernameAvailable">Free! <img src="images/check.png"></div>
+<div id="usernameUnavailable">In use. <img src="images/ecks.png"></div>
 </div>
 
 </body>

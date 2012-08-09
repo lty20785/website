@@ -17,12 +17,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+
+        <link rel="stylesheet" href="stylesheets/common.css" type="text/css" />
+        <title>Password Recovery</title>
     </head>
     <body>
         
         <div id="retrieve_pwd">
-        <h4>Retrieve Your Password</h4>
+        <h2>Retrieve Your Password</h2>
 <?php
 if ($error) {
   echo "<p class='errmsg'>{$error}</p>";

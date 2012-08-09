@@ -50,7 +50,7 @@ class user_functions
           /* Attempt to create new username and password in database, 
            * then automatically log in */
           $userId = signup($username, $password, $email);
-          
+
           if (!$userId) {
             return array(
               "where" => "signup",
@@ -61,7 +61,6 @@ class user_functions
           $_SESSION['username'] = $username;
           $_SESSION['userId'] = $userId;
           $this->send_welcome_email($username, $email);
-          $this->logout();
 
           return array();
         }

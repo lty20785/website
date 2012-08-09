@@ -1,0 +1,11 @@
+
+select[name="sport"] {
+  width: 149px;
+}
+
+div#statistics ul {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+

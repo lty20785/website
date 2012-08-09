@@ -124,7 +124,7 @@ WHERE userID=$1
     AND admin=true;
 SQL;
 
-  $result = executeSQL($ocnn, $sql, $args);
+  $result = executeSQL($conn, $sql, $args);
   if (getResultCount($result) == 1) {
     closeDB($conn);
     return true;

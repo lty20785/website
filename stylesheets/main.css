@@ -8,7 +8,7 @@ div#alerts {
 div#alerts ul {
   list-style-type: none;
   padding-left: 0px;
-  margin-left; 0px;
+  margin-left: 0px;
 }
 
 /* Relevant games */
@@ -16,7 +16,7 @@ div#alerts ul {
 div#gamelist ul {
   list-style-type: none;
   padding-left: 0px;
-  margin-left; 0px;
+  margin-left: 0px;
 }
 
 div.gamebox {

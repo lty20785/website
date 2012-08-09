@@ -55,6 +55,11 @@ CREATE TABLE Game (
   tookPlace boolean
 );
 
+CREATE TABLE RatedGame (
+  userID int REFERENCES WebUser (userID) ON DELETE CASCADE,
+  gameID int REFERENCES Game (gameID) ON DELETE CASCADE
+);
+
 CREATE TABLE Joined (
   userID int REFERENCES WebUser (userID) ON DELETE CASCADE,
   gameID int REFERENCES Game (gameID) ON DELETE CASCADE,

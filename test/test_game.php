@@ -7,7 +7,7 @@ function testCreate() {
 
   $gameInfo = array(
     "sportId" => 1,
-    "date" => '25/12/2012',
+    "date" => '2012-12-25',
     "time" => '9:00',
     "location" => 'Downtown',
     "privacy" => "public",

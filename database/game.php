@@ -166,8 +166,9 @@ function isGamePast($gameId) {
 
   $timestamp = $info['date'] . " " . $info['time'];
   $gameTime = new DateTime($timestamp);
+  $now = new DateTime();
 
-  return $gameTime < new DateTime;
+  return $gameTime < $now;
 }
 
 
@@ -183,7 +184,7 @@ try {
   $args = array($gameId);
   $sql = <<<SQL
 SELECT
-    g.organiserId, wu.firstName, wu.lastName,
+    g.organiserId, wu.username,
     g.sportId, s.sportName,
     g.location, g.date, g.time, g.privacy,
     g.description
@@ -208,15 +209,14 @@ SQL;
 
   $ret = array(
     "organiserId" => $row[0],
-    "organiserFirstName" => $row[1],
-    "organiserLastName" => $row[2],
-    "sportId" => $row[3],
-    "sportName" => $row[4],
-    "location" => $row[5],
-    "date" => $row[6],
-    "time" => $row[7],
-    "privacy" => $row[8],
-    "description" => $row[9],
+    "organiserUsername" => $row[1],
+    "sportId" => $row[2],
+    "sportName" => $row[3],
+    "location" => $row[4],
+    "date" => $row[5],
+    "time" => $row[6],
+    "privacy" => $row[7],
+    "description" => $row[8],
   );
 
   closeDB($conn);
@@ -390,7 +390,10 @@ try {
     return false;
   }
 
-  $args = array($gameId, (int) $confirmed);
+  $confInt = (int) $confirmed;
+  if ($confirmed === null) {$confInt = null;}
+
+  $args = array($gameId, $confInt);
   $sql = <<<SQL
 SELECT userID
 FROM Joined
@@ -494,8 +497,11 @@ try {
     return false;
   }
 
+  $confInt = (int) $confirmed;
+  if ($confirmed === null) {$confInt = null;}
+
   /* Update the table */
-  $args = array($gameId, $userId, (int) $confirmed);
+  $args = array($gameId, $userId, $confInt);
   $sql = <<<SQL
 UPDATE Joined
 SET confirmed=$3

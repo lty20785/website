@@ -103,8 +103,8 @@ SQL;
   $ret = array();
   while ($row = nextRow($result)) {
     array_push($ret, array(
-      "commentID" => $row[0],
-      "userID" => $row[1],
+      "commentId" => $row[0],
+      "userId" => $row[1],
       "username" => $row[2],
       "postTime" => $row[3],
       "commentText" => $row[4],

@@ -74,6 +74,7 @@ SQL;
   $result = executeSQL($conn, $sql, $args);
   if (getUpdateCount($result) != 1) {
     /* They're already friends */
+    echo "|" . $lower . "<" . $higher . "|";
     closeDB($conn);
     return false;
   }
@@ -180,7 +181,7 @@ SQL;
 
 
 /* Rate a player.  $rating is an integer, +1 or -1 */
-function ratePlayer($userId, $rating) {
+function ratePlayer($userId, $rating, $gameId) {
 try {
   $activeUser = $_SESSION['userId'];
   if (!$activeUser) {
@@ -192,9 +193,17 @@ try {
     return false;
   }
 
-  if (!areFriends($activeUser, $userId)) {
-    /* Can only rate friends! */
+  // Already rated people for this game
+  if (alreadyRated($activeUser, $gameId)) {
     return false;
+  }
+
+  if (!areFriends($activeUser, $userId)) {
+    /* They're not friends yet, so make them friends */
+    if (!makeFriends($activeUser, $userId)) {
+      echo "aaaa";
+      return false;
+    }
   }
 
   $currentRating = getRating($userId, $activeUser);
@@ -234,11 +243,55 @@ SQL;
     return false;
   }
 
+  // Now he's rated someone, so put them in RatedGame so they
+  // can't do it again.
+  $args = array($activeUser, $gameId);
+  $sql = <<<SQL
+INSERT INTO RatedGame (userID, gameID)
+SELECT $1, $2
+WHERE NOT EXISTS (SELECT * FROM RatedGame WHERE userID=$1 AND gameID=$2);
+SQL;
+
+  $result = executeSQL($conn, $sql, $args);
+
   closeDB($conn);
   return true;
 
 } catch (Exception $e) {
   error("ratePlayer: {$e}");
+  closeDB($conn);
+  return false;
+}
+}
+
+
+/* Return true if the user has already rated someone for $gameId */
+function alreadyRated($userId, $gameId) {
+try {
+
+  if (!$conn = connectDB()) {
+    return false;
+  }
+
+  $args = array($userId, $gameId);
+  $sql = <<<SQL
+SELECT *
+FROM RatedGame
+WHERE userID=$1
+    AND gameID=$2;
+SQL;
+
+  $result = executeSQL($conn, $sql, $args);
+  if (getUpdateCount($result) == 1) {
+    closeDB($conn);
+    return true;
+  }
+
+  closeDB($conn);
+  return false;
+
+} catch (Exception $e) {
+  error("alreadyRated: {$e}");
   closeDB($conn);
   return false;
 }

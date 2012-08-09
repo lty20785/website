@@ -1,0 +1,61 @@
+
+form#editableForm.uneditable > input:not([class="unhidden"]) {
+  display: none;
+}
+
+form#editableForm.editable > span, form#editableForm.editable > button {
+  display: none;
+}
+
+ul#participants {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+ul#comments {
+  list-style-type: none;
+  padding-left: 0px;
+  margin-left: 0px;
+  text-align: center;
+}
+
+li.gameComment {
+  text-align: center;
+}
+
+li.gameComment:nth-child(odd) > div.comment {
+  background-color: #cccccc;
+}
+
+li.gameComment:nth-child(even) > div.comment {
+  background-color: #aaaaaa;
+}
+
+ul#comments .comment {
+  display: inline-block;
+  width: 650px;
+  max-width: 650px;
+  text-align: center;
+  border: 0px;
+  margin: 0px;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+ul#comments .commentInfo {
+  float: left;
+  width: 20%;
+  vertical-align: middle;
+}
+
+ul#comments .commentText {
+  float: left;
+  text-align: left;
+  margin-left: 15px;
+}
+
+
+input#commentField {
+  width: 500px;
+}

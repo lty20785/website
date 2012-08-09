@@ -1,7 +1,7 @@
 <?php
 
-include '../database/session.php';
-
+include_once '../database/session.php';
+include_once '../database/profile.php';
 
 /* Test the login() function */
 function testLogin() {
@@ -29,7 +29,7 @@ function testLogin() {
 /* Test the signup() function */
 function testSignup() {
 
-  if (signup("ryan", "asdfasdf", "hoeker@gmail.com") != -1) {
+  if (signup("ryan", "asdfasdf", "hoeker@gmail.com")) {
     echo "testSignup--Username already in use, incorrect return value.\n";
     return false;
   }
@@ -68,4 +68,5 @@ if (testSignup()) {
 if (testChangePassword()) {
   echo "testChangePassword--All passed.\n";
 }
+
 ?>

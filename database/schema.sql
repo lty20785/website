@@ -63,8 +63,7 @@ CREATE TABLE RatedGame (
 CREATE TABLE Joined (
   userID int REFERENCES WebUser (userID) ON DELETE CASCADE,
   gameID int REFERENCES Game (gameID) ON DELETE CASCADE,
-  confirmed boolean NOT NULL DEFAULT false,
-  doneRating boolean
+  confirmed boolean NOT NULL DEFAULT false
 );
 
 CREATE TABLE Comment (
